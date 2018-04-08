@@ -1,0 +1,638 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+        body{
+              background-image: url("picture/back.png");
+              background-repeat: repeat;
+
+            }
+            h1 {
+                margin: 20px auto;
+                width: 630px;
+              color: blue;
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 40px;
+              font-weight: bolder;
+              background-color: white;
+            }
+
+            h2{
+                font-family: sans-serif;
+                font-size: 30px;
+                font-weight: bolder;
+            }
+
+            #login{
+                font-size: 45px;
+                font-family: sans-serif;
+                margin: 15% auto;
+                background: rgba(20,20,20,0.9);
+                box-shadow: 0px 0px 10px  2px #777;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                color: white;
+            }
+
+            #login_gumb{
+                width:150px;
+                height: 50px;
+                font-size: 20px;
+                background-color: #5F60FF;
+                box-shadow: 0px 0px 10px  2px #777;
+                border-style: none;
+            }
+
+            #login_priimek{
+                width:200px;
+                height: 50px;
+                font-size: 20px;
+                box-shadow: 0px 0px 10px  2px #777;
+                text-align: center;
+            }
+
+            #wraper_whole{
+                display: none;
+            }
+            /*wraper glavni*/
+            .contenedorPuzzle {
+                margin: 20px auto;
+                width: 630px;
+                /*background: rgba(20,20,20,0.8);*/
+                background: rgba(20,20,20,0.9);
+                box-shadow: 0px 0px 10px  2px #777;
+                padding: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+                height: 320px;
+            }
+
+            /*wraper glavni5*/
+            .contenedorPuzzle5 {
+    
+                margin: 20px auto;
+                width: 930px;
+                /*background: rgba(20,20,20,0.8);*/
+                background: rgba(20,20,20,0.9);
+                box-shadow: 0px 0px 10px  2px #777;
+                padding: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+                height: 320px;
+            }
+
+            /* Puzzle plac*/
+            #contenedorPiezas{
+                background: #5F60FF;
+                width: 125px;
+                padding-top: 10px;
+                padding-left: 25px; 
+                height: 310px;
+                float: left;
+                margin-left: 10px;
+                box-shadow: 0px 0px 10px  2px #5F60FF;
+                border-radius: 5px;
+            }
+
+             /* Puzzle plac¸5*/
+            #contenedorPiezas5{
+                background: #5F60FF;
+                width: 225px;
+                padding-top: 10px;
+                padding-left: 25px; 
+                height: 310px;
+                float: left;
+                margin-left: 10px;
+                box-shadow: 0px 0px 10px  2px #5F60FF;
+                border-radius: 5px;
+            }
+            /*wraper delovna povrsina*/
+            #puzzle {
+                background: #FFE25F;
+                width: 450px;
+                height: 100%;
+                float: left;
+                margin-left: 10px;
+                box-shadow: 0px 0px 10px  2px #B29200;
+                border-radius: 5px;
+            }
+
+            #puzzle5 {
+                background: #FFE25F;
+                width: 650px;
+                height: 100%;
+                float: left;
+                margin-left: 10px;
+                box-shadow: 0px 0px 10px  2px #B29200;
+                border-radius: 5px;
+            }
+
+            .contenedorPieza {
+                width: 100px;
+                height: 100px;
+                float: left;
+                border-style: solid;
+                border-color: white;
+                box-sizing: content-box;
+                margin-left: 5px;
+            }
+
+            .contenedorPieza5 {
+                width: 100px;
+                height: 100px;
+                float: left;
+                border-style: solid;
+                border-color: white;
+                box-sizing: content-box;
+                margin-left: 5px;
+            }
+
+            .puzzlepic{
+                float: left;
+                padding: 1px;
+                width: 98px;
+                height: 98px;
+            }
+            
+            .playButton{
+                width: 100%;
+                
+                height: 75px;  
+                clear: both;
+                
+            }
+            
+            .playMusicButton{
+                width: 35px;
+                margin-top: 25px;
+                /*margin-left: 200px;*/
+            }
+            
+            #puzzle_wrap{
+                width: 335px;
+                margin-left: 55px;
+                height: 120px;
+            }
+
+            #puzzle_wrap2{
+                width: 635px;
+                margin-left: 115px;
+                height: 120px;
+            }
+
+            #puzzle_wrap4{
+                width: 635px;
+                margin-left: 105px;
+                height: 120px;
+            }
+
+            #puzzle_wrap5{
+                width: 635px;
+                margin-left: 45px;
+                height: 120px;
+            }
+            
+            .confirmButton{
+                background-color: #008CBA;
+                width: 100px;
+                height: 35px;
+                /*margin-left: 175px;*/
+                border: none;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
+        </style>
+        <script src="script/buzz.js"></script>
+        <script src="script/jquery-3.2.1.min"></script>
+    <script>
+        function start(e) {
+            e.dataTransfer.effecAllowed = 'move'; 
+            e.dataTransfer.setData("Text", e.target.id); 
+            e.target.style.opacity = '0.4'; 
+        }
+
+        function end(e){
+            e.target.style.opacity = ''; // Restaura la opacidad del elemento			
+            e.dataTransfer.clearData("Data");			
+        }
+
+        function enter(e) {
+            return true;
+        }
+
+
+        function over(e) {
+            if ((e.target.className == "contenedorPieza") || (e.target.id == "contenedorPiezas"))
+                return false;
+            else
+            return true;
+        }
+
+        function drop(e){
+            e.preventDefault(); 
+            var elementoArrastrado = e.dataTransfer.getData("Text");
+            e.target.appendChild(document.getElementById(elementoArrastrado)); 
+            //comprobarPuzzle();
+
+        }
+
+        function comprobarPuzzle1(){
+            if((document.getElementById('cat_red1').parentNode.id=='part11') &&
+                (document.getElementById('cat_green1').parentNode.id=='part12') &&
+                (document.getElementById('cat_black1').parentNode.id=='part13'))
+            {
+                playSound("sound/Kidsyay");
+                document.getElementById("cat_rezultat1").style.color="green";
+                document.getElementById("cat_rezultat1").innerHTML="Bravo! Rezultat je pravilen.";
+            }
+            else{
+                //alert('Zvoki NISO pravilno zloženi!!!');
+                playSound("sound/Wrong");
+                document.getElementById("cat_rezultat1").style.color="red";
+                document.getElementById("cat_rezultat1").innerHTML="Rezultat je žal napačen.";
+            }
+            document.getElementById("confirmCorr").style.display="none";
+        }
+
+         function comprobarPuzzle2(){
+            if((document.getElementById('cat_green2').parentNode.id=='part21') &&
+                (document.getElementById('cat_blue2').parentNode.id=='part22') &&
+                (document.getElementById('cat_red2').parentNode.id=='part23')&&
+                (document.getElementById('cat_black2').parentNode.id=='part24'))
+            {
+                playSound("sound/Kidsyay");
+                document.getElementById("cat_rezultat2").style.color="green";
+                document.getElementById("cat_rezultat2").innerHTML="Bravo! Rezultat je pravilen.";
+            }
+            else{
+                //alert('Zvoki NISO pravilno zloženi!!!');
+                playSound("sound/Wrong");
+                document.getElementById("cat_rezultat2").style.color="red";
+                document.getElementById("cat_rezultat2").innerHTML="Rezultat je žal napačen.";
+            }
+            document.getElementById("confirmInCorr").style.display="none";
+        }
+
+        function comprobarPuzzle3(){
+            if(((document.getElementById('pet_jun_green1').parentNode.id=='part31')||(document.getElementById('pet_jun_red1').parentNode.id=='part31')) &&
+                ((document.getElementById('pet_jun_red1').parentNode.id=='part32')||(document.getElementById('pet_jun_green1').parentNode.id=='part32')) &&
+                (document.getElementById('pet_jun_blue1').parentNode.id=='part33'))
+            {
+                playSound("sound/Kidsyay");
+                document.getElementById("pet_junakov_rezultat_1").style.color="green";
+                document.getElementById("pet_junakov_rezultat_1").innerHTML="Bravo! Rezultat je pravilen.";
+            }
+            else{
+                //alert('Zvoki NISO pravilno zloženi!!!');
+                playSound("sound/Wrong");
+                document.getElementById("pet_junakov_rezultat_1").style.color="red";
+                document.getElementById("pet_junakov_rezultat_1").innerHTML="Rezultat je žal napačen.";
+            }
+            document.getElementById("confirmCorr_pet_junakov1").style.display="none";
+        }
+
+        function comprobarPuzzle4(){
+            if((document.getElementById('pet_jun_red2').parentNode.id=='part41') &&
+                (document.getElementById('pet_jun_orange2').parentNode.id=='part42') &&
+                ((document.getElementById('pet_jun_green2').parentNode.id=='part43') ||(document.getElementById('pet_jun_black2').parentNode.id=='part43'))&&
+                (document.getElementById('pet_jun_blue2').parentNode.id=='part44') &&
+                ((document.getElementById('pet_jun_black2').parentNode.id=='part45')||(document.getElementById('pet_jun_green2').parentNode.id=='part45')))
+            {
+                playSound("sound/Kidsyay");
+                document.getElementById("pet_junakov_rezultat_2").style.color="green";
+                document.getElementById("pet_junakov_rezultat_2").innerHTML="Bravo! Rezultat je pravilen.";
+            }
+            else{
+                //alert('Zvoki NISO pravilno zloženi!!!');
+                playSound("sound/Wrong");
+                document.getElementById("pet_junakov_rezultat_2").style.color="red";
+                document.getElementById("pet_junakov_rezultat_2").innerHTML="Rezultat je žal napačen.";
+            }
+            document.getElementById("confirmCorr_pet_junakov2").style.display="none";
+        }
+
+        function comprobarPuzzle5(){
+            if((document.getElementById('trobentica_red1').parentNode.id=='part51') &&
+                (document.getElementById('trobentica_blue1').parentNode.id=='part52'))
+            {
+                playSound("sound/Kidsyay");
+                document.getElementById("trobentica_1").style.color="green";
+                document.getElementById("trobentica_1").innerHTML="Bravo! Rezultat je pravilen.";
+            }
+            else{
+                //alert('Zvoki NISO pravilno zloženi!!!');
+                playSound("sound/Wrong");
+                document.getElementById("trobentica_1").style.color="red";
+                document.getElementById("trobentica_1").innerHTML="Rezultat je žal napačen.";
+            }
+            document.getElementById("confirmCorr_trobentica1").style.display="none";
+        }
+
+        function comprobarPuzzle6(){
+            if((document.getElementById('trobentica_green2').parentNode.id=='part61') &&
+                (document.getElementById('trobentica_blue2').parentNode.id=='part62')&&
+                (document.getElementById('trobentica_red2').parentNode.id=='part63')&&
+                (document.getElementById('trobentica_black2').parentNode.id=='part64'))
+            {
+                playSound("sound/Kidsyay");
+                document.getElementById("trobentica_2").style.color="green";
+                document.getElementById("trobentica_2").innerHTML="Bravo! Rezultat je pravilen.";
+            }
+            else{
+                //alert('Zvoki NISO pravilno zloženi!!!');
+                playSound("sound/Wrong");
+                document.getElementById("trobentica_2").style.color="red";
+                document.getElementById("trobentica_2").innerHTML="Rezultat je žal napačen.";
+            }
+            document.getElementById("confirmCorr_trobentica2").style.display="none";
+        }
+ 
+        function comprobarnavegador() {
+            if( 
+                (navigator.userAgent.toLowerCase().indexOf('msie ') > -1) || 
+                ((navigator.userAgent.toLowerCase().indexOf('safari') > -1) && (navigator.userAgent.toLowerCase().indexOf('chrome') == -1)))
+            {
+                alert("Tu navegador no soporta correctamente las funciones Drag & Drop de HTML5. Prueba con otro navegador.");
+            }
+
+        }
+        
+        function playCorr(){
+            playSound('sound/Mucek_bel_cela');
+            document.getElementById("playMusicCorr").style.display="none";
+        }
+        
+        function playInCorr(){
+            playSound('sound/Mucek_bel_cela');
+            document.getElementById("playMusicInCorr").style.display="none";
+        }
+
+        function playCorr_pet_junakov(){
+            playSound('sound/Pet junakov_cela');
+            document.getElementById("playMusicCorr_pet_junakov").style.display="none";
+        }
+        
+        function playInCorr_pet_junakov(){
+            playSound('sound/Pet junakov_cela');
+            document.getElementById("playMusicInCorr_pet_junakov").style.display="none";
+        }
+
+        function playCorr_trobentica(){
+            playSound('sound/trobentica_cela');
+            document.getElementById("playMusicCorrtrobentica").style.display="none";
+        }
+        
+        function playInCorr_trobentica(){
+            playSound('sound/trobentica_cela');
+            document.getElementById("playMusicInCorrtrobentica").style.display="none";
+        }
+        
+        function playSound(sound_path){
+            buzz.all().stop();/*Stop all music*/
+           var mysound = new buzz.sound(sound_path, {
+                formats: [ "ogg", "mp3", "aac" ]
+            });
+            mysound.play();
+        }
+
+        function download(text, name, type) {
+          var a = document.getElementById("a");
+          var file = new Blob([text], {type: type});
+          a.href = URL.createObjectURL(file);
+          a.download = name;
+        }
+
+        function showGame(){
+            document.getElementById("wraper_whole").style.display="initial";
+            document.getElementById("login").style.display="none";
+        }
+
+        function makeFile(){
+            var resitev_cat_corr="Rešitev:\n\nRdeča muca= part11\nZelena muca= part12\nČrna muca= part13" + "\n\n";
+            var cat_corr_red="Rdeča muca= "+document.getElementById('cat_red1').parentNode.id + "\n";
+            var cat_corr_green="Zelena muca= "+document.getElementById('cat_green1').parentNode.id + "\n";
+            var cat_corr_black="Črna muca=  "+document.getElementById('cat_black1').parentNode.id + "\n";
+
+            var resitev_cat_incorr="Rešitev:\n\nZelena muca= part21\nModra muca= part22\nRdeča muca= part23\nČrna muca= part24\n\n";
+            var cat_incorr_red="Zelena muca= "+document.getElementById('cat_green2').parentNode.id + "\n";
+            var cat_incorr_green="Modra muca= "+document.getElementById('cat_blue2').parentNode.id + "\n";
+            var cat_incorr_black="Rdeča muca=  "+document.getElementById('cat_red2').parentNode.id + "\n";
+            var cat_incorr_blue="Črna muca=  "+document.getElementById('cat_black2').parentNode.id + "\n";
+
+            var resitev_petj_corr="Rešitev:\n\nZeleni junak= part31\nRdeči junak= part32\nModer junak= part33" + "\n\n";
+            var petj_corr_red="Zeleni junak= "+document.getElementById('pet_jun_green1').parentNode.id + "\n";
+            var petj_corr_green="Rdeči junak= "+document.getElementById('pet_jun_red1').parentNode.id + "\n";
+            var petj_corr_blue="Modri junak=  "+document.getElementById('pet_jun_blue1').parentNode.id + "\n";
+
+            var resitev_petj_incorr="Rešitev:\n\nRdeči junak= part41\nOranžni junak= part42\nZeleni junak= part43\nModri junak= part44\nČrni junak= part45\n\nAli:\n\nRdeči junak= part41\nOranžni junak= part42\nČrni junak= part43\nModri junak= part44\nZeleni junak= part45" + "\n\n";
+            var petj_incorr_red="Rdeči junak= "+document.getElementById('pet_jun_red2').parentNode.id + "\n";
+            var petj_incorr_orange="Oranžni junak= "+document.getElementById('pet_jun_orange2').parentNode.id + "\n";
+            var petj_incorr_green="Zeleni junak=  "+document.getElementById('pet_jun_green2').parentNode.id + "\n";
+            var petj_incorr_blue="Modri junak= "+document.getElementById('pet_jun_blue2').parentNode.id + "\n";
+            var petj_incorr_black="Črni junak=  "+document.getElementById('pet_jun_black2').parentNode.id + "\n";
+
+            var resitev_trob_corr="Rešitev:\n\nRdeča trobentica= part51\nModra trobentica= part52\n"+"\n\n";
+            var trob_corr_red="Rdeča trobentica= "+document.getElementById('trobentica_red1').parentNode.id + "\n";
+            var trob_corr_blue="Modra trobentica= "+document.getElementById('trobentica_blue1').parentNode.id + "\n";
+
+            var resitev_trob_incorr="Rešitev:\n\nZelena trobentica = part61\nModra trobentica= part62\nRdeča trobentica= part63\nČrna trobentica= part64\n"+"\n\n";
+            var trob_incorr_green="Zelena trobentica= "+document.getElementById('trobentica_green2').parentNode.id + "\n";
+            var trob_incorr_blue="Modra trobentica= "+document.getElementById('trobentica_blue2').parentNode.id + "\n";
+            var trob_incorr_red="Rdeča trobentica= "+document.getElementById('trobentica_red2').parentNode.id + "\n";
+            var trob_incorr_black="Črna trobentica= "+document.getElementById('trobentica_black2').parentNode.id + "\n";
+
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth()+1;
+            var year = date.getFullYear();
+            var indetifikacija= document.getElementById("login_priimek").value;
+            download("Nalogo je reševal: " + document.getElementById("login_priimek").value + "\n\n" +
+                "Datum reševanja: " + day + "." + month + "." + year + "\n\n" +
+                "__________________________________________________"+
+                "Mucek beli - Level 1 "+resitev_cat_corr + "Rezultat udeleženega:\n\n" + cat_corr_red + cat_corr_green + cat_corr_black + "\n\n"+ 
+                "__________________________________________________" +
+                "Mucek Beli - Level 2 " + resitev_cat_incorr + "Rezultat udeleženega:\n\n" + cat_incorr_red + cat_incorr_green + cat_incorr_black + cat_incorr_blue+ "\n\n"+
+                "__________________________________________________" +
+                "Pet junakov - Level 1 " + resitev_petj_corr + "Rezultat udeleženega:\n\n" + petj_corr_red + petj_corr_green + petj_corr_blue+ "\n\n"+
+                "__________________________________________________" +
+                "Pet junakov - Level 2 " + resitev_petj_incorr + "Rezultat udeleženega:\n\n" + petj_incorr_red + petj_incorr_orange+ petj_incorr_green+ petj_incorr_blue + petj_incorr_black + "\n\n"+
+                "__________________________________________________" +
+                "Trobentica - Level 1 " + resitev_trob_corr + "Rezultat udeleženega:\n\n" + trob_corr_red + trob_corr_blue + "\n\n"+
+                "__________________________________________________" +
+                "Trobentica - Level 2 " + resitev_trob_incorr + "Rezultat udeleženega:\n\n" + trob_incorr_green +  trob_incorr_blue + trob_incorr_red+ trob_incorr_black+ "\n\n"
+                ,indetifikacija, 'text/plain');
+        }
+    </script>
+    </head>
+    <body onload="comprobarnavegador();">
+        <div id="login">
+            <center><span>Vnesi svoj priimek in ime:</span><br />
+             <input type="text" id="login_priimek" />
+            <button onclick="showGame()" id="login_gumb">Potrdi</button></center>
+        </div>
+        <div id="wraper_whole">
+        <header>
+            <h1> Mucek bel - Level 1</h1>
+        </header>
+
+        <section class="contenedorPuzzle">
+            <div id="contenedorPiezas" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+                <img class="puzzlepic" id="cat_black1" src="picture/cat_black.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_corr_3');" name="crna macka">
+                <img class="puzzlepic" id="cat_red1" src="picture/cat_red.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_corr_1');" name="rdeča mačka">
+                <img class="puzzlepic" id="cat_green1" src="picture/cat_green.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_corr_2');" name="zelena mačka">
+            </div>
+            <div id="puzzle">
+                <div class="playButton">
+                    <center><img class="playMusicButton" id="playMusicCorr" src="picture/play-button.png" onclick="playCorr();" /></center>
+                </div>
+                <div id="puzzle_wrap">
+                    <div class="contenedorPieza" id="part11" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part12" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part13" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                </div>
+                 <center><input class="confirmButton" type="button" id="confirmCorr" onclick="comprobarPuzzle1();" value="Potrdi" /></center><br />
+                 <h2 align="center" id="cat_rezultat1"></h2>
+            </div>	
+        </section>
+        <!--_______________________________________________________________________________________________-->
+        <header>
+            <h1> Mucek bel - Level 2 </h1>
+        </header>
+
+        <section class="contenedorPuzzle5">
+            <div id="contenedorPiezas5" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+                <img  class="puzzlepic" id="cat_black2" src="picture/cat_black.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_incorr_2');">
+                <img class="puzzlepic" id="cat_red2" src="picture/cat_red.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_incorr_3');">
+                <img class="puzzlepic" id="cat_green2" src="picture/cat_green.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_incorr_1');">
+                <img class="puzzlepic" id="cat_blue2" src="picture/cat_blue.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Mucek_incorr_4');">
+            </div>
+            <div id="puzzle5">
+                <div class="playButton">
+                    <center><img class="playMusicButton" id="playMusicInCorr" src="picture/play-button.png" onclick="playInCorr();" /></center>
+                </div>
+                <div id="puzzle_wrap4">
+                    <div class="contenedorPieza" id="part21" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part22" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part23" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part24" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                </div>
+                 <center><input type="button"  class="confirmButton" id="confirmInCorr" onclick="comprobarPuzzle2();" value="Potrdi" /></center><br />
+                 <h2 align="center" id="cat_rezultat2"></h2>
+            </div>  
+        </section>
+        
+        <!--_______________________________________________________________________________________________-->
+        <header>
+            <h1> Pet junakov - Level 1 </h1>
+        </header>
+
+        <section class="contenedorPuzzle">
+            <div id="contenedorPiezas" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+                <img class="puzzlepic" id="pet_jun_green1" src="picture/pet_junakov_green.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_corr_1');">
+                <img class="puzzlepic" id="pet_jun_blue1" src="picture/pet_junakov_blue.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_corr_3');">
+                <img class="puzzlepic" id="pet_jun_red1" src="picture/pet_junakov_red.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_corr_2');">
+            </div>
+            <div id="puzzle">
+                <div class="playButton">
+                   <center> <img class="playMusicButton" id="playMusicCorr_pet_junakov" src="picture/play-button.png" onclick="playCorr_pet_junakov();" /></center>
+                </div>
+                <div id="puzzle_wrap">
+                    <div class="contenedorPieza" id="part31" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part32" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part33" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                </div>
+                 <center><input type="button"  class="confirmButton" id="confirmCorr_pet_junakov1" onclick="comprobarPuzzle3();" value="Potrdi" /></center><br />
+                 <h2 align="center" id="pet_junakov_rezultat_1"></h2>
+            </div>  
+        </section>
+
+        <!--_______________________________________________________________________________________________-->
+        <header>
+            <h1> Pet junakov - Level 2 </h1>
+        </header>
+
+        <section class="contenedorPuzzle5">
+            <div id="contenedorPiezas5" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+                <img class="puzzlepic" id="pet_jun_green2" src="picture/pet_junakov_green.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_incorr_3');">
+                <img class="puzzlepic" id="pet_jun_blue2" src="picture/pet_junakov_blue.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_incorr_4');">
+                <img class="puzzlepic" id="pet_jun_red2" src="picture/pet_junakov_red.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_incorr_1');">
+                <img class="puzzlepic" id="pet_jun_black2" src="picture/pet_junakov_black.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_incorr_5');">
+                 <img class="puzzlepic" id="pet_jun_orange2" src="picture/pet_junakov_orange.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Pet junakov_incorr_2');">
+            </div>
+            <div id="puzzle5">
+                <div class="playButton">
+                    <center><img class="playMusicButton" id="playMusicInCorr_pet_junakov" src="picture/play-button.png" onclick="playInCorr_pet_junakov();" /></center>
+                </div>
+                <div id="puzzle_wrap5">
+                    <div class="contenedorPieza" id="part41" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part42" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part43" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part44" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part45" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                </div>
+                 <center><input type="button"  class="confirmButton" id="confirmCorr_pet_junakov2" onclick="comprobarPuzzle4();" value="Potrdi" /></center><br />
+                 <h2 align="center" id="pet_junakov_rezultat_2"></h2>
+            </div>  
+        </section>
+
+         <!--_______________________________________________________________________________________________-->
+        <header>
+            <h1> Trobentica - Level 1 </h1>
+        </header>
+
+        <section class="contenedorPuzzle">
+            <div id="contenedorPiezas" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+                <img class="puzzlepic" id="trobentica_blue1" src="picture/trumpet_blue.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Trobentica_corr_2');">
+                <img class="puzzlepic" id="trobentica_red1" src="picture/trumpet_red.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Trobentica_corr_1');">
+            </div>
+            <div id="puzzle">
+                <div class="playButton">
+                    <center><img class="playMusicButton" id="playMusicCorrtrobentica" src="picture/play-button.png" onclick="playCorr_trobentica();" /></center>
+                </div>
+                <div id="puzzle_wrap2">
+                    <div class="contenedorPieza" id="part51" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part52" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                </div>
+                 <center><input type="button"  class="confirmButton" id="confirmCorr_trobentica1" onclick="comprobarPuzzle5();" value="Potrdi" /></center><br />
+                 <h2 align="center" id="trobentica_1"></h2>
+            </div>  
+        </section>
+        <!--_______________________________________________________________________________________________-->
+        <header>
+            <h1> Trobentica - Level 2 </h1>
+        </header>
+
+        <section class="contenedorPuzzle5">
+            <div id="contenedorPiezas5" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)">
+                <img class="puzzlepic" id="trobentica_blue2" src="picture/trumpet_blue.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Trobentica_incorr_2');">
+                <img class="puzzlepic" id="trobentica_red2" src="picture/trumpet_red.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Trobentica_incorr_3');">
+                <img class="puzzlepic" id="trobentica_green2" src="picture/trumpet_green.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Trobentica_incorr_1');">
+                <img class="puzzlepic" id="trobentica_black2" src="picture/trumpet_black.png" draggable="true" ondragstart="start(event)" ondragend="end(event)" onclick="playSound('sound/Trobentica_incorr_4');">
+            </div>
+            <div id="puzzle5">
+                <div class="playButton">
+                    <center><img class="playMusicButton" id="playMusicInCorrtrobentica" src="picture/play-button.png" onclick="playInCorr_trobentica();" /></center>
+                </div>
+                <div id="puzzle_wrap4">
+                    <div class="contenedorPieza" id="part61" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part62" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part63" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                    <div class="contenedorPieza" id="part64" ondragenter="return enter(event)" ondragover="return over(event)" ondrop="return drop(event)"></div>
+                </div>
+                 <center><input type="button"  class="confirmButton" id="confirmCorr_trobentica2" onclick="comprobarPuzzle6();" value="Potrdi" /></center><br />
+                 <h2 align="center" id="trobentica_2"></h2>
+            </div>  
+        </section>
+        <!--_______________________________________________________________________________________________-->
+        <section>
+            <center> <!--<button onclick="makeFile()">Ustvari datoteko</button><br /><br />-->
+                <a href="" id="a"><img src="picture/download.png" height="100" width="100" onclick="makeFile();" /></a>
+            </center>
+        </section>
+    </div>
+    </body>
+</html>
