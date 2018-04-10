@@ -1,5 +1,4 @@
 # Music-memory-game
-A children game with music puzzle. Point of a game is to listen whole song, which you have then put it together with pieces made with  different length of a song..
+A children game with music puzzle. Point of the game is to listen at first to the entire song and afterwards torebuild it with melody blocks from left to the right.  
 
-Game is written in HTML and JavaScript. To use a game you have to download all folders and index.html file and put them to the same place.
-
+The game is written in HTML and JavaScript. In order to play the game you have to download all the folders and index.html file as well and put it together in a new folder. 
